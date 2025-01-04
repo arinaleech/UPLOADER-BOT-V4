@@ -31,7 +31,7 @@ if __name__ == "__main__" :
     )
 
 
-    user = Client(
+    app = Client(
         "user",
         session_string=Config.SESSION_STR,
         api_id=Config.API_ID,
