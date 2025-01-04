@@ -39,7 +39,7 @@ if __name__ == "__main__" :
     )
 
     Ntbots.start()
-    print("🎊 I AM ALIVE 🎊  • Support @NT_BOTS_SUPPORT")
+    print("🎊 I AM ALIVE 🎊  •  SUPPORT")
   
     user.start()
     print("👤 User client is running!")
