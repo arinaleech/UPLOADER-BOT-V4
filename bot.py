@@ -1,38 +1,53 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
+# ©️ LISA-KOREA | @LISA_FAN_LK | NT_BOT_CHANNEL | @NT_BOTS_SUPPORT | LISA-KOREA/UPLOADER-BOT-V4
 
-# the logging things
+# [⚠️ Do not change this repo link ⚠️] :- https://github.com/LISA-KOREA/UPLOADER-BOT-V4
+
+
+
 import logging
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 import os
+from plugins.config import Config
+from pyrogram import filters, Client, idle
 
-# the secret configuration specific things
-if bool(os.environ.get("WEBHOOK", False)):
-    from config import Config
-else:
-    from config import Config
-
-import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 
 if __name__ == "__main__" :
-    # create download directory, if not exist
+
     if not os.path.isdir(Config.DOWNLOAD_LOCATION):
         os.makedirs(Config.DOWNLOAD_LOCATION)
-    plugins = dict(
-        root="plugins"
-    )
-    app = pyrogram.Client(
-        "UploadLinkToFileBot",
+    plugins = dict(root="plugins")
+    bot = Client(
+        "URL UPLOADER BOT",
         bot_token=Config.BOT_TOKEN,
-        api_id=Config.APP_ID,
+        api_id=Config.API_ID,
         api_hash=Config.API_HASH,
         plugins=plugins
     )
-    Config.AUTH_USERS.add(1834908260)
-    app.run()
+
+
+    user = Client(
+        "User",
+        session_string=Config.SESSION_STR,
+        api_id=Config.API_ID,
+        api_hash=Config.API_HASH
+    )
+
+    bot.start()
+    print("🎊 I AM ALIVE 🎊  • Support @NT_BOTS_SUPPORT")
+  
+    user.start()
+    print("👤 User client is running!")
+  
+    try:
+        Client.idle()
+    except KeyboardInterrupt:
+        print("Bot is shutting down...")
+      
+    user.stop()
+    bot.stop()
+     
