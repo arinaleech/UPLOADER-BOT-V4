@@ -32,7 +32,7 @@ if __name__ == "__main__" :
 
 
     user = Client(
-        "User",
+        "karan367",
         session_string=Config.SESSION_STR,
         api_id=Config.API_ID,
         api_hash=Config.API_HASH
