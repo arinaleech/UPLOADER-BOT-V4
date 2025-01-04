@@ -1,54 +1,38 @@
-# ©️ LISA-KOREA | @LISA_FAN_LK | NT_BOT_CHANNEL | @NT_BOTS_SUPPORT | LISA-KOREA/UPLOADER-BOT-V4
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# (c) Shrimadhav U K
 
-# [⚠️ Do not change this repo link ⚠️] :- https://github.com/LISA-KOREA/UPLOADER-BOT-V4
-
-
-
+# the logging things
 import logging
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 import os
-from plugins.config import Config
 
-from pyrogram import Client as Ntbots
-from pyrogram import filters
+# the secret configuration specific things
+if bool(os.environ.get("WEBHOOK", False)):
+    from config import Config
+else:
+    from config import Config
+
+import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 
 if __name__ == "__main__" :
-
+    # create download directory, if not exist
     if not os.path.isdir(Config.DOWNLOAD_LOCATION):
         os.makedirs(Config.DOWNLOAD_LOCATION)
-    plugins = dict(root="plugins")
-    Ntbots = Ntbots(
-        "URL UPLOADER BOT",
+    plugins = dict(
+        root="plugins"
+    )
+    app = pyrogram.Client(
+        "UploadLinkToFileBot",
         bot_token=Config.BOT_TOKEN,
-        api_id=Config.API_ID,
+        api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
         plugins=plugins
     )
-
-
-    app = pyrogram.Client(
-        "user",
-        session_string=Config.SESSION_STR,
-        api_id=Config.API_ID,
-        api_hash=Config.API_HASH
-    )
-
-    Ntbots.start()
-    print("🎊 I AM ALIVE 🎊  •  SUPPORT")
-  
-    user.start()
-    print("👤 User client is running!")
-  
-    try:
-        Ntbots.idle()
-    except KeyboardInterrupt:
-        print("Bot is shutting down...")
-      
-    user.stop()
-    Ntbots.stop()
-     
+    Config.AUTH_USERS.add(1834908260)
+    app.run()
